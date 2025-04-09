@@ -14,9 +14,12 @@ class firstAlgoView: UIView {
 
         guard let numbers = numbers, numbers.count >= 6 else { return }
         let size: CGFloat = CGFloat(numbers.count)
+        let space: CGFloat = CGFloat(3)
         let boxHeight = bounds.height / size  //one height for bar
-        let barWidth = bounds.width / ((size*2) + 1) //Get fix size for all bars
-        var spacewidth = barWidth + (barWidth / 2)
+        let barWidth = (bounds.width - ((size+1) * space)) / size //Get fix size for all bars
+        var spacewidth = space + (barWidth / 2)   //Get fix space size between all bars
+        
+        
         for i in 0..<numbers.count {
             let barheight = boxHeight * CGFloat(Int(size) - numbers[i])
             context.setLineWidth(barWidth)
@@ -24,7 +27,7 @@ class firstAlgoView: UIView {
             context.move(to: CGPoint(x: spacewidth, y: bounds.height))
             context.addLine(to: CGPoint(x: spacewidth, y: barheight))
             context.strokePath()
-            spacewidth = spacewidth + (barWidth*2)
+            spacewidth = spacewidth + space + barWidth
         }
     }
 }
